@@ -1,6 +1,19 @@
 # Fluvie MCP Server
 
+[![CI](https://github.com/SimonErich/fluvie_mcp_server/actions/workflows/ci.yml/badge.svg)](https://github.com/SimonErich/fluvie_mcp_server/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 Model Context Protocol server for the Fluvie video composition library. Provides AI-powered documentation search, code generation, and template suggestions.
+
+**[📖 Documentation](https://simonerich.github.io/fluvie_mcp_server/)** | **[🔌 Live Server](https://mcp.fluvie.at)**
+
+## Related Projects
+
+| Project | Description |
+|---------|-------------|
+| [📦 fluvie](https://github.com/SimonErich/fluvie) | Main Flutter package for programmatic video generation |
+| [🤖 fluvie_mcp_server](https://github.com/SimonErich/fluvie_mcp_server) | MCP server for AI-assisted development (this repo) |
+| [🌐 fluvie_website](https://github.com/SimonErich/fluvie_website) | Marketing website source code |
 
 ## Quick Start
 
