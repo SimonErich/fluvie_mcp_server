@@ -1,7 +1,21 @@
 # Fluvie MCP Server Dockerfile
 # Multi-stage build for minimal production image
 
-# Stage 1: Build
+# Stage 1: Fetch docs from main Fluvie repository
+FROM alpine:latest AS docs
+
+# Install git
+RUN apk add --no-cache git
+
+WORKDIR /docs
+
+# Clone only the doc directory using sparse checkout for efficiency
+RUN git clone --depth 1 --filter=blob:none --sparse \
+    https://github.com/SimonErich/fluvie.git . && \
+    git sparse-checkout set doc && \
+    rm -rf .git
+
+# Stage 2: Build Dart application
 FROM dart:stable AS build
 
 WORKDIR /app
@@ -18,7 +32,7 @@ COPY . .
 # Build AOT compiled executable
 RUN dart compile exe bin/server.dart -o bin/server
 
-# Stage 2: Production
+# Stage 3: Production
 FROM debian:bookworm-slim AS production
 
 # Install runtime dependencies
@@ -35,9 +49,8 @@ WORKDIR /app
 # Copy compiled binary
 COPY --from=build /app/bin/server /app/bin/server
 
-# Copy documentation files (will be mounted in production)
-# These are optional - can be overridden with volume mount
-COPY --from=build /app/data/docs /app/data/docs
+# Copy docs from the docs stage (fetched from main Fluvie repo)
+COPY --from=docs /docs/doc /app/data/docs
 
 # Set ownership
 RUN chown -R fluvie:fluvie /app
