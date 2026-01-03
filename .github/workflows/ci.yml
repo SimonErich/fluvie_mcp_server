@@ -48,7 +48,8 @@ jobs:
       - name: Verify executable
         run: |
           chmod +x bin/server
-          ./bin/server --help || true
+          file bin/server
+          ls -la bin/server
 
   docker:
     name: Docker Build & Publish
