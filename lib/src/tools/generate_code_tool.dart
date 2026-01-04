@@ -103,14 +103,93 @@ String _generateCode({
 
   buffer.writeln('```');
   buffer.writeln();
+
+  // Add preview and export setup for full videos
+  if (type == 'full_video') {
+    _generatePreviewSetup(buffer);
+  }
+
   buffer.writeln('## Notes\n');
   buffer.writeln('- Timing is in frames. At ${fps}fps: 30 frames = 1 second');
   buffer
       .writeln('- Adjust `startFrame` values to control when elements appear');
   buffer.writeln('- Use `fadeInFrames`/`fadeOutFrames` for smooth transitions');
   buffer.writeln('- Replace asset paths with your actual file paths');
+  buffer.writeln();
+  buffer.writeln('## Required Imports\n');
+  buffer.writeln('```dart');
+  buffer.writeln("import 'package:flutter/material.dart';");
+  buffer.writeln("import 'package:fluvie/fluvie.dart';");
+  buffer.writeln("import 'package:fluvie/declarative.dart';");
+  buffer.writeln('```');
 
   return buffer.toString();
+}
+
+/// Generates the preview and export setup code.
+void _generatePreviewSetup(StringBuffer buffer) {
+  buffer.writeln();
+  buffer.writeln('## Preview & Export Setup\n');
+  buffer.writeln(
+    'Use `VideoPreview` to preview and export your video. Add this to your `main.dart`:',
+  );
+  buffer.writeln();
+  buffer.writeln('```dart');
+  buffer.writeln("import 'package:flutter/material.dart';");
+  buffer.writeln("import 'package:fluvie/fluvie.dart';");
+  buffer.writeln("// Import your video file");
+  buffer.writeln("import 'my_video.dart';");
+  buffer.writeln();
+  buffer.writeln('void main() => runApp(const MyApp());');
+  buffer.writeln();
+  buffer.writeln('class MyApp extends StatelessWidget {');
+  buffer.writeln('  const MyApp({super.key});');
+  buffer.writeln();
+  buffer.writeln('  @override');
+  buffer.writeln('  Widget build(BuildContext context) {');
+  buffer.writeln('    return MaterialApp(');
+  buffer.writeln("      title: 'My Video',");
+  buffer.writeln('      theme: ThemeData.dark(),');
+  buffer.writeln('      home: const VideoPage(),');
+  buffer.writeln('    );');
+  buffer.writeln('  }');
+  buffer.writeln('}');
+  buffer.writeln();
+  buffer.writeln('class VideoPage extends StatelessWidget {');
+  buffer.writeln('  const VideoPage({super.key});');
+  buffer.writeln();
+  buffer.writeln('  @override');
+  buffer.writeln('  Widget build(BuildContext context) {');
+  buffer.writeln('    return Scaffold(');
+  buffer.writeln("      appBar: AppBar(title: const Text('My Video')),");
+  buffer.writeln('      body: VideoPreview(');
+  buffer.writeln('        video: const MyVideo(),');
+  buffer.writeln('        showControls: true,');
+  buffer.writeln('        showExportButton: true,');
+  buffer.writeln('      ),');
+  buffer.writeln('    );');
+  buffer.writeln('  }');
+  buffer.writeln('}');
+  buffer.writeln('```');
+  buffer.writeln();
+  buffer.writeln('### Programmatic Export\n');
+  buffer.writeln(
+    'For programmatic export with progress tracking, use `VideoExporter`:',
+  );
+  buffer.writeln();
+  buffer.writeln('```dart');
+  buffer.writeln('final path = await VideoExporter(const MyVideo())');
+  buffer.writeln('  .withQuality(RenderQuality.high)');
+  buffer.writeln("  .withFileName('my_video.mp4')");
+  buffer.writeln("  .withProgress((p) => print('\${(p * 100).toInt()}%'))");
+  buffer.writeln('  .render();');
+  buffer.writeln();
+  buffer.writeln("print('Video saved to: \$path');");
+  buffer.writeln();
+  buffer.writeln('// Or render and save to Downloads in one step:');
+  buffer.writeln('await VideoExporter(const MyVideo()).renderAndSave();');
+  buffer.writeln('```');
+  buffer.writeln();
 }
 
 void _generateFullVideo(

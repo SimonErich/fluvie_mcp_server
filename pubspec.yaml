@@ -1,6 +1,6 @@
 name: fluvie_mcp_server
 description: MCP server for Fluvie video composition library - provides documentation search, code generation, and template suggestions
-version: 1.0.0
+version: 0.1.1
 repository: https://github.com/simonerich/fluvie
 
 environment:
