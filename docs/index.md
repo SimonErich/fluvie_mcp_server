@@ -18,14 +18,14 @@ The Model Context Protocol (MCP) is an open standard that allows AI assistants t
 
 ### Using the Public Server
 
-The easiest way to get started is using the public server at `https://mcp.fluvie.at`:
+The easiest way to get started is using the public server at `https://mcp.fluvie.dev`:
 
 **Claude Desktop** (`claude_desktop_config.json`):
 ```json
 {
   "mcpServers": {
     "fluvie": {
-      "url": "https://mcp.fluvie.at/mcp",
+      "url": "https://mcp.fluvie.dev/mcp",
       "transport": "http"
     }
   }
@@ -37,7 +37,7 @@ The easiest way to get started is using the public server at `https://mcp.fluvie
 {
   "mcpServers": {
     "fluvie": {
-      "url": "https://mcp.fluvie.at/mcp"
+      "url": "https://mcp.fluvie.dev/mcp"
     }
   }
 }

@@ -27,7 +27,7 @@ services:
       start_period: 10s
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.fluvie-mcp.rule=Host(`mcp.fluvie.at`)"
+      - "traefik.http.routers.fluvie-mcp.rule=Host(`mcp.fluvie.dev`)"
       - "traefik.http.routers.fluvie-mcp.entrypoints=websecure"
       - "traefik.http.routers.fluvie-mcp.tls.certresolver=letsencrypt"
       - "traefik.http.services.fluvie-mcp.loadbalancer.server.port=8080"
@@ -47,7 +47,7 @@ services:
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL:-admin@fluvie.at}"
+      - "--certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL:-admin@fluvie.dev}"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"

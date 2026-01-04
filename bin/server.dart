@@ -179,7 +179,7 @@ void main() async {
   <pre>{
   "mcpServers": {
     "fluvie": {
-      "url": "https://mcp.fluvie.at/mcp",
+      "url": "https://mcp.fluvie.dev/mcp",
       "transport": "http"
     }
   }

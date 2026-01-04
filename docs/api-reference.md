@@ -9,7 +9,7 @@ The Fluvie MCP Server exposes HTTP endpoints for MCP communication and server ma
 
 ## Base URL
 
-- **Public Server**: `https://mcp.fluvie.at`
+- **Public Server**: `https://mcp.fluvie.dev`
 - **Local Development**: `http://localhost:8080`
 
 ## Endpoints
@@ -274,15 +274,15 @@ When rate limited, the server returns:
 
 ```bash
 # Health check
-curl https://mcp.fluvie.at/health
+curl https://mcp.fluvie.dev/health
 
 # List tools
-curl -X POST https://mcp.fluvie.at/mcp \
+curl -X POST https://mcp.fluvie.dev/mcp \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","method":"tools/list","id":1}'
 
 # Search docs
-curl -X POST https://mcp.fluvie.at/mcp \
+curl -X POST https://mcp.fluvie.dev/mcp \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"searchDocs","arguments":{"query":"layer animation"}},"id":1}'
 ```
@@ -290,7 +290,7 @@ curl -X POST https://mcp.fluvie.at/mcp \
 ### JavaScript
 
 ```javascript
-const response = await fetch('https://mcp.fluvie.at/mcp', {
+const response = await fetch('https://mcp.fluvie.dev/mcp', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({

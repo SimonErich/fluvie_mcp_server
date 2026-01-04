@@ -5,7 +5,7 @@
 
 Model Context Protocol server for the Fluvie video composition library. Provides AI-powered documentation search, code generation, and template suggestions.
 
-**[📖 Documentation](https://simonerich.github.io/fluvie_mcp_server/)** | **[🔌 Live Server](https://mcp.fluvie.at)**
+**[📖 Documentation](https://simonerich.github.io/fluvie_mcp_server/)** | **[🔌 Live Server](https://mcp.fluvie.dev)**
 
 ## Related Projects
 
@@ -126,7 +126,7 @@ Add to your Claude Desktop configuration:
 {
   "mcpServers": {
     "fluvie": {
-      "url": "https://mcp.fluvie.at/mcp",
+      "url": "https://mcp.fluvie.dev/mcp",
       "transport": "http"
     }
   }
@@ -140,7 +140,7 @@ Add to your Claude Desktop configuration:
   "models": [...],
   "mcpServers": {
     "fluvie": {
-      "url": "https://mcp.fluvie.at/mcp"
+      "url": "https://mcp.fluvie.dev/mcp"
     }
   }
 }
