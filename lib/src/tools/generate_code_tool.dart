@@ -137,7 +137,7 @@ void _generatePreviewSetup(StringBuffer buffer) {
   buffer.writeln('```dart');
   buffer.writeln("import 'package:flutter/material.dart';");
   buffer.writeln("import 'package:fluvie/fluvie.dart';");
-  buffer.writeln("// Import your video file");
+  buffer.writeln('// Import your video file');
   buffer.writeln("import 'my_video.dart';");
   buffer.writeln();
   buffer.writeln('void main() => runApp(const MyApp());');
@@ -387,12 +387,17 @@ void _generateFullVideo(
     buffer.writeln('          child: PolaroidFrame(');
     buffer.writeln('            rotation: -0.08,');
     buffer.writeln("            caption: 'Memory 1',");
+    buffer.writeln('            // Use Image.asset for local files:');
     buffer.writeln('            child: Image.asset(');
     buffer.writeln("              'assets/photo1.jpg',");
     buffer.writeln('              width: 280,');
     buffer.writeln('              height: 220,');
     buffer.writeln('              fit: BoxFit.cover,');
     buffer.writeln('            ),');
+    buffer.writeln('            // Or Image.network for remote images:');
+    buffer.writeln(
+      "            // child: Image.network('https://example.com/photo1.jpg', fit: BoxFit.cover),",
+    );
     buffer.writeln('          ),');
     buffer.writeln('        ),');
     buffer.writeln('        FloatingElement(');
@@ -550,15 +555,31 @@ void _generateTemplateUsage(
     case 'RankingData':
       buffer.writeln("        title: 'Top 5',");
       buffer.writeln('        items: [');
+      buffer.writeln('          RankingItem(');
+      buffer.writeln('            rank: 1,');
+      buffer.writeln("            label: 'First',");
+      buffer.writeln("            value: 'Details',");
+      buffer.writeln('            // Use imageBuilder for network images:');
       buffer.writeln(
-        "          RankingItem(rank: 1, title: 'First', subtitle: 'Details'),",
+        "            imageBuilder: (ctx) => Image.network('https://example.com/1.jpg', fit: BoxFit.cover),",
       );
+      buffer.writeln('            // Or use imagePath for local assets:');
+      buffer.writeln("            // imagePath: 'assets/1.jpg',");
+      buffer.writeln('          ),');
+      buffer.writeln('          RankingItem(');
+      buffer.writeln('            rank: 2,');
+      buffer.writeln("            label: 'Second',");
       buffer.writeln(
-        "          RankingItem(rank: 2, title: 'Second', subtitle: 'Details'),",
+        "            imageBuilder: (ctx) => Image.asset('assets/2.jpg', fit: BoxFit.cover),",
       );
+      buffer.writeln('          ),');
+      buffer.writeln('          RankingItem(');
+      buffer.writeln('            rank: 3,');
+      buffer.writeln("            label: 'Third',");
       buffer.writeln(
-        "          RankingItem(rank: 3, title: 'Third', subtitle: 'Details'),",
+        "            imageBuilder: (ctx) => Image.asset('assets/3.jpg', fit: BoxFit.cover),",
       );
+      buffer.writeln('          ),');
       buffer.writeln('        ],');
     case 'MetricsData':
       buffer.writeln("        title: 'Your Stats',");
@@ -569,7 +590,22 @@ void _generateTemplateUsage(
     case 'CollageData':
       buffer.writeln("        title: 'Memories',");
       buffer.writeln(
-        "        images: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg'],",
+        '        // Use imageBuilders for flexible image loading (network, asset, etc):',
+      );
+      buffer.writeln('        imageBuilders: [');
+      buffer.writeln(
+        "          (ctx) => Image.network('https://example.com/1.jpg', fit: BoxFit.cover),",
+      );
+      buffer.writeln(
+        "          (ctx) => Image.asset('assets/2.jpg', fit: BoxFit.cover),",
+      );
+      buffer.writeln(
+        "          (ctx) => Image.asset('assets/3.jpg', fit: BoxFit.cover),",
+      );
+      buffer.writeln('        ],');
+      buffer.writeln('        // Or use images for local asset paths only:');
+      buffer.writeln(
+        "        // images: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg'],",
       );
     case 'SummaryData':
       buffer.writeln("        message: 'See you next year!',");
